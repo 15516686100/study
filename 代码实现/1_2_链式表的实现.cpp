@@ -1,12 +1,21 @@
 /*
     Project: single linkeed list (数据结构 单链表)
 	InitList(LinkList &L) 参数：单链表L 功能：初始化 时间复杂度 O(1)
-	ListLength(LinkList L) 参数：单链表L 功能：获得单链表长度 时间复杂度O(n) 
+    ListEmpty(LinkList L) 参数：单链表L 功能：判断单链表是否为空
+	ListLength(LinkList L) 参数：单链表L 功能：获得单链表长度 时间复杂度O(n)
+    DestoryList(LinkList &L) 参数：带返回的单链表L 功能：销毁单链表，单链表销毁后不存在
+    ClearList(LinkList &L)  参数：带返回的单链表L 功能：清空链表，链表仍存在，但表中无元素
+    CreateListHead(LinkList &L, int n) 参数：带返回的单链表L和整形变量n-用于插入单链表的长度
+                                       功能：采取从头部插入元素的方式创建单链表
+    CreateListTail(LinkList &L, int n) 参数：带返回的单链表L和整形变量n-用于插入单链表的长度
+                                       功能：采取从尾部插入元素的方式创建单链表
+    GetElemList(LinkList L, int i) 参数：单链表L，位置i 功能：获取链表某个元素的内容，通过变量e返回
+    *LocateElemList(LinkList L, int e) 参数：单链表L，元素e 功能：获取链表中值为e的元素的地址
+    IndexElemList(LinkList L, int e) 参数：单链表L，位置i 功能：按值查找，返回链表中值为e的位置序号
 	ListInsert(LinkList &L,int i,ElemType e) 参数：单链表L,位置i，元素e 功能：位置i后插 时间复杂度O(n)[加入了查找]若已知指针p指向的后插 O(1)
 	ListDelete(LinkList &L,int i) 参数：单链表L，位置i 功能：删除位置i元素 时间复杂度O(n)[加入了查找] 
 	                              若已知p指针指向的删除 最好是O(1),因为可以与后继结点交换数据域，然后删除后继结点。
-								  最坏是O(n),即从头查找p之前的结点,然后删除p所指结点
-	LocateElem(LinkList L,ElemType e) 参数：单链表L，元素e 功能：查找第一个等于e的元素，返回指针 时间复杂度O(n) 
+								  最坏是O(n),即从头查找p之前的结点,然后删除p所指结点 
 */
 #include<cstdio>
 #include<cstdlib>
@@ -208,10 +217,10 @@ bool DeleteList(LinkList &L, int i)
 {
     LNode *p,*q;
     int j=1;
-    p=(LNode*)malloc(sizeof(LNode));
+    // p=(LNode*)malloc(sizeof(LNode));
     q=new LNode;                          //分配新结点
     p=L->next;
-    while(p && j<=i-1)
+    while(p && j<i-1)
     {                            //寻找第i个结点，并令p指针指向其前驱结点
         p=p->next;
         j++;
