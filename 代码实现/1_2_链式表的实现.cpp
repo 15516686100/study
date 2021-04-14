@@ -93,7 +93,6 @@ void CreateListHead(LinkList &L, int n)
 {
     InitList(L);               //初始化链表
     LNode* p;                  //创建结点p
-//    p=(LinkList)malloc(sizeof(LNode));
     for(int i=n;i>0;--i)       //倒序插入
     {
         p=new LNode;           //p=(LNOde*)malloc(sizeof(LNode));
@@ -102,7 +101,8 @@ void CreateListHead(LinkList &L, int n)
         p->next=L->next;       //插入到表头
         L->next=p;
     }
-//    free(p);                  //释放p空间
+//    delete p; 
+    //此处不再释放p结点的空间，因为p已经作为结点插入到链表当中，释放p结点会将整个链表释放 
 }
 
 //尾插法创建链表
@@ -111,7 +111,6 @@ void CreateListTail(LinkList &L, int n)
     InitList(L);
     LNode* r;                       //创建尾指针
     LNode* p;                      //创建结点用于插入的新数据
-//    r=(LNode*)malloc(sizeof(LNode));   //C方式生成新结点
     r=L;                           //尾指针指向头结点
     for(int i=0; i<n; i++)
     {
@@ -122,8 +121,8 @@ void CreateListTail(LinkList &L, int n)
         r->next=p;                //插入到表尾
         r=p;                     //尾指针指向新的结点
     }
-//    free(r);                  //C方式释放空间
-//    delete p;                //C++方式释放空间
+	//    delete p;                //C++方式释放空间
+    //此处不再释放p结点的空间，因为p已经作为结点插入到链表当中，释放p结点会将整个链表释放
 }
 
 //获取链表某个元素的内容，通过变量e返回
@@ -181,8 +180,7 @@ int IndexElemList(LinkList L, int e)
 bool InsertList(LinkList &L, int i, int e)
 {
     LNode *p,*s;
-//    p=new LNode;
-    p=L;
+    p=L;                                 //前插法，p直接指向头结点 
     int j=0;
     while(p && j<i-1)                   //寻找第i个结点，使得p指向i结点的前驱结点 
     {
@@ -198,8 +196,7 @@ bool InsertList(LinkList &L, int i, int e)
     s->data=e;                    //为结点s赋值e
     s->next=p->next;              //将结点s插入到p后
     p->next=s;
-//    delete p;
-//    delete s;
+//    delete s;                   //由于s已经作为结点插入到链表中，故s的空间不可释放 
     return true;
 }
 
@@ -208,8 +205,7 @@ bool DeleteList(LinkList &L, int i)
 {
     LNode *p,*q;
     int j=1;
-    p=(LNode*)malloc(sizeof(LNode));
-    q=new LNode;                          //分配新结点
+    q=new LNode;                  //为q分配新的空间 
     p=L->next;
     while(p && j<i-1)
     {                            //寻找第i个结点，并令p指针指向其前驱结点
@@ -218,10 +214,10 @@ bool DeleteList(LinkList &L, int i)
     }
     if(!p || j>i-1)
         return false;           //删除位置不合理
-    q=p->next;                  //用q结点临时保存需要删除的结点
+    q=p->next;                  //用结点q保存p的后继 
     p->next=q->next;            //将p结点的后继结点指向需要删除结点的后继结点
-//    delete q;                   //释放q的空间，等价于删除q
-//    free(p);                    //释放p的空间
+	delete q;                   //释放q的空间 
+	//此处q结点临时储存p的后继结点，故操作完成后需要释放q结点的空间 
 }
 
 
