@@ -1,4 +1,3 @@
-
 /*
     Project: sequence_stack (数据结构-顺序栈)
 	InitStack(SqStack &S) 参数：顺序栈S 功能：初始化  时间复杂度O(1)
@@ -130,8 +129,6 @@ void PushStack(SqStack &S)
         flag=Push(S,e);
         if(flag)
             printf("%d已入栈!\n", e);
-        else
-            printf("栈已满！\n");
     }
 }
 
@@ -148,8 +145,6 @@ void PopStack(SqStack &S)
         flag=Pop(S,e);
         if(flag)
             printf("%d已出栈!\n", e);
-        else
-            printf("栈已空！\n");
     }
 }
 
@@ -161,8 +156,6 @@ void GetTopStack(SqStack S)
     flag=GetTop(S,e);
     if(flag)
         printf("栈顶元素为：%d\n",e);
-    else
-        printf("栈空！\n");
 }
 
 //求栈长度功能
