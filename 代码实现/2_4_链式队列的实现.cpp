@@ -1,4 +1,3 @@
-
 /*
     Project: single_linked_queue (链队列)
     InitQueue(LinkQueue &Q)            参数：链队Q 功能：初始化  时间复杂度O(1)
