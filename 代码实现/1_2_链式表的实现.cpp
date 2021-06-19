@@ -92,7 +92,7 @@ void ClearList(LinkList &L)
 void CreateListHead(LinkList &L, int n)
 {
     InitList(L);               //初始化链表
-    LNode* p;                  //创建结点p
+    LNode *p;                  //创建结点p
     for(int i=n;i>0;--i)       //倒序插入
     {
         p=new LNode;           //p=(LNOde*)malloc(sizeof(LNode));
@@ -109,8 +109,8 @@ void CreateListHead(LinkList &L, int n)
 void CreateListTail(LinkList &L, int n)
 {
     InitList(L);
-    LNode* r;                       //创建尾指针
-    LNode* p;                      //创建结点用于插入的新数据
+    LNode *r;                       //创建尾指针
+    LNode *p;                      //创建结点用于插入的新数据
     r=L;                           //尾指针指向头结点
     for(int i=0; i<n; i++)
     {
